@@ -1,7 +1,7 @@
 # Building a Solar System using Hand Recognition and Three.js 🚀
 ![image](https://user-images.githubusercontent.com/7003853/173869318-8e258484-3968-44c1-b286-6226466b04b8.png)
 
-Accompanying code for JSNation 2022 talk.
+Accompanying code for Reversim 2022 talk.
 <br>Demo video here: https://www.youtube.com/watch?v=pQtlMjw6K0M
 
 
