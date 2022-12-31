@@ -107,7 +107,7 @@ export function radiansToDegrees(radians) {
 const vec = new THREE.Vector3(); // create once and reuse
 const pos = new THREE.Vector3(); // create once and reuse
 export function getVectorFromXY(x, y) {
-  vec.set((x / 1920) * 2 - 1, -(y / 1080) * 2 + 1, 0.5);
+  vec.set((x / window.innerWidth) * 2 - 1, -(y / window.innerHeight) * 2 + 1, 0.5);
   vec.unproject(context.camera);
   vec.sub(context.camera.position).normalize();
   const distance = window.targetZ - context.camera.position.z / vec.z;

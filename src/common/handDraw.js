@@ -12,8 +12,8 @@ export class HandDraw {
   constructor() {
     this.canvas = document.getElementById("output2");
     this.ctx = this.canvas.getContext("2d");
-    this.canvas.width = 1920;
-    this.canvas.height = 1080;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
     const canvasContainer = document.getElementById("output2-container");
     canvasContainer.style.width = `${this.canvas.width}px`;
     canvasContainer.style.height = `${this.canvas.height}px`;

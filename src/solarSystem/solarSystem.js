@@ -15,15 +15,15 @@ export function initSolarSytem() {
     canvas: canvas,
     antialias: true,
   });
-  canvas.width = 1920;
-  canvas.height = 1080;
-  context.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  context.renderer.setSize(canvas.width, canvas.height);
   context.renderer.setPixelRatio(window.devicePixelRatio);
 
   context.scene = new THREE.Scene();
   context.camera = new THREE.PerspectiveCamera(
     60,
-    canvas.clientWidth / canvas.clientHeight,
+    canvas.width / canvas.height,
     1,
     1000
   );
@@ -88,4 +88,13 @@ function animate() {
 
   context.renderer.render(context.scene, context.camera);
   requestAnimationFrame(animate);
+}
+
+export function resizeSolarSystem() {
+  const canvas = document.querySelector("#three");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  context.camera.aspect = canvas.width / canvas.height;
+  context.camera.updateProjectionMatrix();
+  context.renderer.setSize(canvas.width, canvas.height);
 }

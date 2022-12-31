@@ -42,29 +42,56 @@
       }
       #output2-container {
         position: relative;
-        width: 1920px;
-        height: 1080px;
+        width: 100%;
+        height: 100%;
       }
       #output2,
       #three {
         position: absolute;
         top: 0;
         left: 0;
+        width: 100%;
+        height: 100%;
       }
       #output2 {
         pointer-events: none;
       }
+      #output {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: top left;
+        transform: scale(-0.25, 0.25) translateX(-100%);
+        -webkit-transform: scale(-0.25, 0.25) translateX(-100%);
+      }
       #video {
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);
         display: none;
         width: auto;
         height: auto;
+      }
+      #loading {
+        position: absolute;
+        left: auto;
+        top: auto;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0,0,0,0.7);
+      }
+      #spinner {
+        width: 100px;
+        height: 100px;
       }
     </style>
   </head>
   <body>
     <div id="main">
+      <div id="loading">
+        <img id="spinner" src="/public/assets/loading.gif" />
+      </div>
       <div id="output2-container">
         <canvas id="three"></canvas>
         <canvas id="output2"></canvas>
