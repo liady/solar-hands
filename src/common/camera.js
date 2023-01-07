@@ -1,5 +1,6 @@
-const videoAdjustedWidth = 480;
-const videoAdjustedHeight = 270;
+let videoAdjustedWidth, videoAdjustedHeight;
+let inputVideoAdjustedWidth, inputVideoAdjustedHeight, inputToAdjustedVideoRatio;
+
 export class Camera {
   constructor() {
     this.video = document.getElementById("video");
@@ -22,11 +23,10 @@ export class Camera {
     const videoConfig = {
       audio: false,
       video: {
-        // facingMode: "user",
-        // Only setting the video to a specified size for large screen, on
-        // mobile devices accept the default size.
-        width: 1920,
-        height: 1080,
+        facingMode: "user",
+        // Get maximum possible resolution
+        width: { ideal: 4096 },
+        height: { ideal: 2160 },
         frameRate: {
           ideal: targetFPS,
         },
@@ -48,24 +48,45 @@ export class Camera {
 
     const videoWidth = camera.video.videoWidth;
     const videoHeight = camera.video.videoHeight;
+    const videoAspectRatio = videoWidth / videoHeight;
     // Must set below two lines, otherwise video element doesn't show.
     camera.video.width = videoWidth;
     camera.video.height = videoHeight;
+
+    videoAdjustedWidth = window.innerWidth;
+    videoAdjustedHeight = window.innerHeight;
+    const videoAdjustedAspectRatio = videoAdjustedWidth / videoAdjustedHeight;
 
     camera.canvas.width = videoAdjustedWidth;
     camera.canvas.height = videoAdjustedHeight;
     const canvasContainer = document.querySelector(".canvas-wrapper");
     canvasContainer.style = `width: ${videoAdjustedWidth}px; height: ${videoAdjustedHeight}px`;
 
-    // Because the image from camera is mirrored, need to flip horizontally.
-    camera.ctx.translate(videoAdjustedWidth, 0);
-    camera.ctx.scale(-1, 1);
-
+    // Scale input video drawing on canvas to fit screen
+    if (videoAdjustedAspectRatio >= videoAspectRatio) {
+      inputVideoAdjustedWidth = videoAdjustedWidth;
+      inputVideoAdjustedHeight = inputVideoAdjustedWidth / videoAspectRatio;
+    } else {
+      inputVideoAdjustedHeight = videoAdjustedHeight;
+      inputVideoAdjustedWidth = inputVideoAdjustedHeight * videoAspectRatio;
+    }
+    inputToAdjustedVideoRatio = videoWidth / inputVideoAdjustedWidth;
+    
     return camera;
   }
 
   drawCtx() {
-    this.ctx.drawImage(this.video, 0, 0, videoAdjustedWidth, videoAdjustedHeight);
+    this.ctx.drawImage(
+      this.video,
+      ((inputVideoAdjustedWidth - videoAdjustedWidth) / 2) * inputToAdjustedVideoRatio,
+      ((inputVideoAdjustedHeight - videoAdjustedHeight) / 2) * inputToAdjustedVideoRatio,
+      videoAdjustedWidth * inputToAdjustedVideoRatio,
+      videoAdjustedHeight * inputToAdjustedVideoRatio,
+      0,
+      0,
+      videoAdjustedWidth,
+      videoAdjustedHeight
+    );
   }
 
   clearCtx() {

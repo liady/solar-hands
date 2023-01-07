@@ -4,8 +4,8 @@ import { degToRadians } from "../../common/util";
 const diameter = 6;
 const radius = 3;
 const textures = {
-  base: "/assets/textures/mars_1k.jpg",
-  topo: "/assets/textures/mars_topo_1k.jpg",
+  base: "assets/textures/mars_1k.jpg",
+  topo: "assets/textures/mars_topo_1k.jpg",
 };
 const textureLoader = new THREE.TextureLoader();
 Object.entries(textures).forEach(([, src]) => {

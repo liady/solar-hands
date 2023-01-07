@@ -9,7 +9,7 @@ events.subscribe("hand", (hand) => {
   const handness = hand.handness.toLowerCase();
   hands[handness] = Object.fromEntries(
     Object.entries(hand).map(([keypoint, xy]) => {
-      return [keypoint, { x: 1920 - xy.x, y: xy.y }];
+      return [keypoint, { x: window.innerWidth - xy.x, y: xy.y }];
     })
   );
   detectSnap(hands[handness], handness);

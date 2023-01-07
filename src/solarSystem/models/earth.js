@@ -4,10 +4,10 @@ import { degToRadians } from "../../common/util";
 const diameter = 6;
 const radius = 3;
 const textures = {
-  base: "/assets/textures/earth.jpg",
-  topo: "/assets/textures/earth_topo_1k.jpg",
-  specular: "/assets/textures/earth_ocean_reflectance_4k.jpg",
-  clouds: "/assets/textures/earth_clouds_active2.png",
+  base: "assets/textures/earth.jpg",
+  topo: "assets/textures/earth_topo_1k.jpg",
+  specular: "assets/textures/earth_ocean_reflectance_4k.jpg",
+  clouds: "assets/textures/earth_clouds_active2.png",
 };
 const textureLoader = new THREE.TextureLoader();
 Object.entries(textures).forEach(([, src]) => {
